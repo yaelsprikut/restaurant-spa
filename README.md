@@ -1,5 +1,3 @@
-# This project is no longer maitained. If you've been using the boilerplate, it will work well and good. Latest version of redux and react hooks patterns are not used in the boilerplate and it is not recommended to start a new project with this boilerplate in 2020.
-
 <img src="https://raw.githubusercontent.com/flexdinesh/react-redux-boilerplate/master/app/components/Header/images/FOODLE-2.png" alt="foodle banner" align="center" />
 
 <br />
