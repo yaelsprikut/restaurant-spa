@@ -1,5 +1,6 @@
+<div align="center">
 <img src="https://raw.githubusercontent.com/yaelsprikut/restaurant-spa/master/app/components/Header/images/FOODLE-2.png" alt="foodle banner" align="center" />
-
+</div>
 <br />
 
 <div align="center">A simple restaurant search app built using this awesome minimal, beginner friendly React-Redux boilerplate with all the industry best practices!</div>
