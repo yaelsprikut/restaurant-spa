@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/yaelsprikut/restaurant-spa/master/app/components/Header/images/FOODLE-2.png" alt="foodle banner" align="center" style="align-self:center;" />
+<img src="https://raw.githubusercontent.com/yaelsprikut/restaurant-spa/master/app/components/Header/images/FOODLE-2.png" alt="foodle banner" align="center" />
 
 <br />
 
