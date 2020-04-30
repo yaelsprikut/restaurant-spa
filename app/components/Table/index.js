@@ -82,7 +82,7 @@ class Table extends React.PureComponent {
     } else {
       tableRows = (
         <tr>
-          <td colSpan="2">No results found. Please try filtering again.</td>
+          <td colSpan="2">No results found. Please try filtering.</td>
         </tr>
       );
     }
