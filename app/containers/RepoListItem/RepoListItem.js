@@ -10,7 +10,8 @@ import ListItem from 'components/ListItem';
 import { IssueIcon } from 'components/Icons';
 import './style.scss';
 
-export default class RepoListItem extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export default class RepoListItem extends React.PureComponent {
+  // eslint-disable-line react/prefer-stateless-function
   render() {
     const { item, currentUser } = this.props;
     let nameprefix = '';
@@ -24,10 +25,20 @@ export default class RepoListItem extends React.PureComponent { // eslint-disabl
     // Put together the content of the repository
     const content = (
       <div className="repo-list-item">
-        <a className="repo-list-item__repo-link" href={item.html_url} target="_blank" rel="noopener noreferrer">
+        <a
+          className="repo-list-item__repo-link"
+          href={item.html_url}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           {nameprefix + item.name}
         </a>
-        <a className="repo-list-item__issue-link" href={`${item.html_url}/issues`} target="_blank" rel="noopener noreferrer">
+        <a
+          className="repo-list-item__issue-link"
+          href={`${item.html_url}/issues`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <IssueIcon className="repo-list-item__issue-icon" />
           {item.open_issues_count}
         </a>
@@ -35,9 +46,7 @@ export default class RepoListItem extends React.PureComponent { // eslint-disabl
     );
 
     // Render the content into a list item
-    return (
-      <ListItem key={`repo-list-item-${item.full_name}`} item={content} />
-    );
+    return <ListItem key={`repo-list-item-${item.full_name}`} item={content} />;
   }
 }
 

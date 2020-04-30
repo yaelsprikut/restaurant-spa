@@ -15,18 +15,42 @@
  *    }
  */
 
-import { CHANGE_USERNAME } from './constants';
+import {
+  OPENTABLE_API_URL,
+  GET_CITIES,
+  GET_CITIES_SUCCESS,
+  GET_CITIES_FAILURE,
+} from './constants';
 
-/**
- * Changes the input field of the form
- *
- * @param  {name} name The new text of the input field
- *
- * @return {object}    An action object with a type of CHANGE_USERNAME
- */
-export function changeUsername(name) {
+import axios from 'axios';
+import store from '../../configureStore';
+
+
+export function getCitiesSuccess(data) {
+  console.log("getCitiesSuccess???")
   return {
-    type: CHANGE_USERNAME,
-    name
+    type: GET_CITIES_SUCCESS,
+    data
   };
+}
+
+export function getCitiesError(data) {
+  return {
+    type: GET_CITIES_FAILURE,
+    data
+  };
+}
+
+export function getCities() {
+    let url = `${OPENTABLE_API_URL}/cities`;
+
+    return async function(dispatch) {
+      try {
+        const response = await axios.get(url);
+        console.log(response);
+        dispatch(getCitiesSuccess(response.data.cities))
+      } catch (error) {
+        dispatch(getCitiesError(error));
+      }
+    }
 }

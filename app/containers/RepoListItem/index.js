@@ -5,6 +5,6 @@ import RepoListItem from './RepoListItem';
 
 export default connect(
   createStructuredSelector({
-    currentUser: makeSelectCurrentUser()
-  })
+    currentUser: makeSelectCurrentUser(),
+  }),
 )(RepoListItem);

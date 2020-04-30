@@ -10,56 +10,83 @@ import { Helmet } from 'react-helmet';
 import ReposList from 'components/ReposList';
 import Table from 'components/Table';
 import './style.scss';
+import 'react-bootstrap-typeahead/css/Typeahead.css';
 
-export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+import { Typeahead } from 'react-bootstrap-typeahead';
+import { getCities } from './actions';
+import { fetchProducts } from './saga'
+
+export default class HomePage extends React.PureComponent {
+  // eslint-disable-line react/prefer-stateless-function
   /**
    * when initial state username is not null, submit the form to load repos
    */
   componentDidMount() {
-    const { username, onSubmitForm } = this.props;
-    if (username && username.trim().length > 0) {
-      onSubmitForm();
+    const { onGetCities } = this.props;
+    if(this.props.cities === null) {
+      onGetCities();
     }
   }
 
   render() {
     const {
-      loading, error, repos, username, onChangeUsername, onSubmitForm
+      loading,
+      error,
+      repos,
+      city,
+      onGetCities,
+      onGetTestDispatch,
+      // onSubmitForm,
     } = this.props;
     const reposListProps = {
       loading,
       error,
-      repos
+      repos,
     };
 
     return (
       <article>
         <Helmet>
           <title>Home Page</title>
-          <meta name="description" content="A React.js Boilerplate application homepage" />
+          <meta name="description" content="A React.js application homepage" />
         </Helmet>
         <div className="home-page">
           <section className="centered">
             <h2>Restaurant Search</h2>
-            <p>
-              A minimal <i>React-Redux</i> boilerplate with all the best practices
-            </p>
           </section>
           <section>
-            {/* <form onSubmit={onSubmitForm}>
-              <label htmlFor="username">
-                Show Github repositories by
-                <span className="at-prefix">@</span>
-                <input
+            <Typeahead
+              multiple
+              id="cityField"
+              type="text"
+              className="cityField"
+              value={city}
+              placeholder="Enter a city..."
+              options={this.props.cities}
+              // onChange={(selected) => {
+              //   // Handle selections...
+              //   onGetCities
+              // }}
+            />{' '}
+             <Typeahead
+              multiple
+              id="renderField"
+              type="text"
+              className="refineField"
+              value={city}
+              placeholder="Refine results by adding names, ..."
+              options={['array', 'of', 'refines']}
+              onChange={(selected) => {
+                // Handle selections...
+                console.log(selected)
+              }}
+            />{' '}
+             {/* <input
                   id="username"
                   type="text"
                   placeholder="flexdinesh"
-                  value={username}
-                  onChange={onChangeUsername}
-                />
-              </label>
-            </form> */}
-            <input type="text" id="myInput" placeholder="Search for a city.." />
+                  onChange={onGetCities}
+                /> */}
             <Table />
             <ReposList {...reposListProps} />
           </section>
@@ -74,6 +101,7 @@ HomePage.propTypes = {
   error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   repos: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
   onSubmitForm: PropTypes.func,
-  username: PropTypes.string,
-  onChangeUsername: PropTypes.func
+  city: PropTypes.string,
+  cities: PropTypes.array,
+  onGetCities: PropTypes.func,
 };

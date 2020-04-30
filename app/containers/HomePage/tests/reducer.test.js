@@ -1,11 +1,11 @@
 import homeReducer from '../reducer';
-import { changeUsername } from '../actions';
+import { getCities } from '../actions';
 
 describe('homeReducer', () => {
   let state;
   beforeEach(() => {
     state = {
-      username: '',
+      city: null,
     };
   });
 
@@ -15,9 +15,9 @@ describe('homeReducer', () => {
   });
 
   it('should handle the changeUsername action correctly', () => {
-    const fixture = 'flexdinesh';
-    const expectedResult = { ...state, username: fixture };
+    const fixture = {};
+    const expectedResult = { ...state, city: fixture };
 
-    expect(homeReducer(state, changeUsername(fixture))).toEqual(expectedResult);
+    expect(homeReducer(state, getCities(fixture))).toEqual(expectedResult);
   });
 });

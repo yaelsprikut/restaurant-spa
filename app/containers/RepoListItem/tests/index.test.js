@@ -17,12 +17,12 @@ describe.only('<RepoListItem />', () => {
   beforeEach(() => {
     item = {
       owner: {
-        login: 'flexdinesh'
+        login: 'flexdinesh',
       },
       html_url: 'https://github.com/flexdinesh/react-redux-boilerplate',
       name: 'react-redux-boilerplate',
       open_issues_count: 20,
-      full_name: 'flexdinesh/react-redux-boilerplate'
+      full_name: 'flexdinesh/react-redux-boilerplate',
     };
   });
 
@@ -34,7 +34,7 @@ describe.only('<RepoListItem />', () => {
   it('should not render the current username', () => {
     const renderedComponent = renderComponent({
       item,
-      currentUser: item.owner.login
+      currentUser: item.owner.login,
     });
     expect(renderedComponent.text()).not.toContain(item.owner.login);
   });
@@ -42,7 +42,7 @@ describe.only('<RepoListItem />', () => {
   it('should render usernames that are not the current one', () => {
     const renderedComponent = renderComponent({
       item,
-      currentUser: 'nikgraf'
+      currentUser: 'nikgraf',
     });
     expect(renderedComponent.text()).toContain(item.owner.login);
   });
