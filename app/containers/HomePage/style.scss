@@ -1,9 +1,19 @@
+ /* This section is for displaying the scrollbar to make sure it's clear that the table is scrollable */
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0,0,0,.5);
+  -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+
 .home-page {
-  
   h2 {
     font-size: 1.5em;
   }
-  
+
   section {
     margin: 3em auto;
 
@@ -31,41 +41,63 @@
   }
 }
 
-#myInput {
-	background-image: url('/css/searchicon.png');
-	background-position: 10px 12px;
-	background-repeat: no-repeat;
-	width: 100%;
-	font-size: 16px;
-	padding: 12px 20px 12px 40px;
-	border: 1px solid #ddd;
-	margin-bottom: 12px;
+.cityField {
+  background-repeat: no-repeat;
+  font-size: 16px;
+  padding: 0px 0px 10px 0px;
+  width: 100%;
+  display: inline-block;
 }
-#myTable {
-	border-collapse: collapse;
-	width: 100%;
-	border: 1px solid #ddd;
-	font-size: 18px;
-	th {
-		text-align: left;
-		padding: 12px;
-	}
-	td {
-		text-align: left;
-		padding: 12px;
-	}
-	tr {
-		border-bottom: 1px solid #ddd;
-		&:hover {
-			background-color: #f1f1f1;
-		}
-	}
-	.header {
-		background-color: #f1f1f1;
-  }
+.refineField {
+  background-repeat: no-repeat;
+  font-size: 16px;
+  padding: 0px 0px 20px 0px;
+  width: 100%;
 }
 
-#foodle {
-  width: 60%;
-  margin-top: 3rem;
+.table {
+  height: 300px;
+  overflow: auto;
+}
+
+$breakpoint-tablet: 768px;
+@media (max-width: $breakpoint-tablet) {
+  .cityField,
+  .refineField {
+    width: 100% !important;
+  }
+  .resicon {
+    display: none;
+  }
+}
+#myTable {
+  border-collapse: collapse;
+  width: 100%;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  th {
+    text-align: left;
+    padding: 12px;
+    font-size: 16px;
+  }
+  td {
+    text-align: left;
+    padding: 12px;
+  }
+  tr {
+    font-size: 0.9rem;
+    display: table-row;
+    border-bottom: 1px solid #ddd;
+    &:hover {
+      background-color: #f1f1f1;
+    }
+  }
+  .header {
+    background-color: #f1f1f1;
+  }
+  .resicon {
+    width: 20%;
+    float: left;
+    vertical-align: middle;
+  }
 }

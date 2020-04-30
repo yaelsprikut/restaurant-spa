@@ -1,32 +1,76 @@
-/*
- * Home Actions
- *
- * Actions change things in your application
- * Since this boilerplate uses a uni-directional data flow, specifically redux,
- * we have these actions which are the only way your application interacts with
- * your application state. This guarantees that your state is up to date and nobody
- * messes it up weirdly somewhere.
- *
- * To add a new Action:
- * 1) Import your constant
- * 2) Add a function like this:
- *    export function yourAction(var) {
- *        return { type: YOUR_ACTION_CONSTANT, var: var }
- *    }
- */
+import axios from 'axios';
 
-import { CHANGE_USERNAME } from './constants';
+import {
+  OPENTABLE_API_URL,
+  GET_CITIES_SUCCESS,
+  GET_CITIES_FAILURE,
+  GET_RESTAURANTS_SUCCESS,
+  GET_RESTAURANTS_FAILURE,
+} from './constants';
 
-/**
- * Changes the input field of the form
- *
- * @param  {name} name The new text of the input field
- *
- * @return {object}    An action object with a type of CHANGE_USERNAME
- */
-export function changeUsername(name) {
+export function getCitiesSuccess(data) {
   return {
-    type: CHANGE_USERNAME,
-    name
+    type: GET_CITIES_SUCCESS,
+    data,
+  };
+}
+
+export function getCitiesError(data) {
+  return {
+    type: GET_CITIES_FAILURE,
+    data,
+  };
+}
+
+export function getCities() {
+  const url = `${OPENTABLE_API_URL}/cities`;
+
+  return async function (dispatch) {
+    try {
+      const response = await axios.get(url);
+      dispatch(getCitiesSuccess(response.data.cities));
+    } catch (error) {
+      dispatch(getCitiesError(error));
+    }
+  };
+}
+
+export function getRestaurantsForCitySuccess(data) {
+  return {
+    type: GET_RESTAURANTS_SUCCESS,
+    data,
+  };
+}
+
+export function getRestaurantsForCityError(data) {
+  return {
+    type: GET_RESTAURANTS_FAILURE,
+    data,
+  };
+}
+
+export function getRestaurantsForCity(city) {
+  // get all restaurants for all selected cities
+  return async function (dispatch) {
+    try {
+      const url = `${OPENTABLE_API_URL}/restaurants?city=${city}`;
+      const response = await axios.get(url);
+      const data = response.data.restaurants;
+
+      const restaurantList = [];
+      Object.keys(data).map(function (key) { // eslint-disable-line prefer-arrow-callback
+        return restaurantList.push({
+          name: data[key].name,
+          address: data[key].address,
+          area: data[key].area,
+          city: data[key].city,
+          price: data[key].price,
+          country: data[key].country,
+        });
+      });
+      return dispatch(getRestaurantsForCitySuccess(restaurantList));
+    } catch (error) {
+      return dispatch(getRestaurantsForCityError(error));
+    }
   };
 }

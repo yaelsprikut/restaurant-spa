@@ -22,6 +22,7 @@
     "rules": {
       "no-param-reassign": "off",
       "function-paren-newline": "off",
+      "func-names": "off",
       "arrow-parens": [
         "error",
         "always"

@@ -17,13 +17,15 @@ import Header from 'components/Header';
 import Footer from 'components/Footer';
 import './style.scss';
 
+// const Header = React.lazy(() => import('components/Header'));
+
 const App = () => (
   <div className="app-wrapper">
-    <Helmet
-      titleTemplate="%s - React.js Boilerplate"
-      defaultTitle="React.js Boilerplate"
-    >
-      <meta name="description" content="Restaurant App - created by Yael Sprikut" />
+    <Helmet titleTemplate="%s - Foodle" defaultTitle="Foodle">
+      <meta
+        name="description"
+        content="Restaurant App - created by Yael Sprikut"
+      />
     </Helmet>
     <Header />
     <Switch>

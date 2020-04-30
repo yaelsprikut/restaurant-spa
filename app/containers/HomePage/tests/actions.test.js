@@ -1,17 +1,17 @@
-import { CHANGE_USERNAME } from '../constants';
+import { GET_CITIES_SUCCESS } from '../constants';
 
-import { changeUsername } from '../actions';
+import { getCitiesSuccess } from '../actions';
 
 describe('Home Actions', () => {
-  describe('changeUsername', () => {
-    it('should return the correct type and the passed name', () => {
-      const fixture = 'Max';
+  describe('getCities', () => {
+    it('should return the correct type and the passed city', () => {
+      const fixture = {};
       const expectedResult = {
-        type: CHANGE_USERNAME,
-        name: fixture
+        type: GET_CITIES_SUCCESS,
+        data: fixture,
       };
 
-      expect(changeUsername(fixture)).toEqual(expectedResult);
+      expect(getCitiesSuccess(fixture)).toEqual(expectedResult);
     });
   });
 });
