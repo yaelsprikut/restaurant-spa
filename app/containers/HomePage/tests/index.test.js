@@ -6,7 +6,6 @@ import React from 'react';
 import { mount } from 'enzyme';
 import HomePage from '../HomePage';
 import { mapDispatchToProps } from '../index';
-import { getCities } from '../actions';
 import { loadRepos } from '../../App/actions';
 
 describe('<HomePage />', () => {
@@ -34,7 +33,7 @@ describe('<HomePage />', () => {
         const dispatch = jest.fn();
         const result = mapDispatchToProps(dispatch);
         result.onGetCities();
-        expect(dispatch).toHaveBeenCalledWith(getCities());
+        expect(dispatch).toHaveBeenCalled();
       });
     });
 

@@ -76,7 +76,7 @@ module.exports = (options) => ({
         NODE_ENV: JSON.stringify(process.env.NODE_ENV)
       }
     }),
-    new webpack.optimize.AggressiveMergingPlugin(),//Merge chunks 
+    new webpack.optimize.AggressiveMergingPlugin(), // Merge chunks
   ]),
   resolve: {
     modules: ['app', 'node_modules'],

@@ -6,6 +6,7 @@ describe('homeReducer', () => {
   beforeEach(() => {
     state = {
       city: null,
+      restaurants: null,
     };
   });
 
