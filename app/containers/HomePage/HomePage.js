@@ -7,7 +7,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
-import ReposList from 'components/ReposList';
 import Table from 'components/Table';
 import './style.scss';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
@@ -32,19 +31,11 @@ export default class HomePage extends React.PureComponent {
   render() {
     const ref = React.createRef();
     const {
-      loading,
-      error,
-      repos,
       cities,
       city,
       restaurants,
       onGetRestaurantsForCity,
     } = this.props;
-    const reposListProps = {
-      loading,
-      error,
-      repos,
-    };
 
     const { selectedCities, selectedRestaurantItems } = this.state;
 
@@ -119,7 +110,6 @@ export default class HomePage extends React.PureComponent {
               selectedCities={selectedCities}
               selectedRestaurants={selectedRestaurantItems}
             />
-            <ReposList {...reposListProps} />
           </section>
         </div>
       </article>
@@ -128,10 +118,6 @@ export default class HomePage extends React.PureComponent {
 }
 
 HomePage.propTypes = {
-  loading: PropTypes.bool,
-  error: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  repos: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
-  onSubmitForm: PropTypes.func,
   city: PropTypes.string,
   cities: PropTypes.array,
   restaurants: PropTypes.array,
