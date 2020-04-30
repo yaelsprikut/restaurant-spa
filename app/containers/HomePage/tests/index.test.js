@@ -10,18 +10,6 @@ import { getCities } from '../actions';
 import { loadRepos } from '../../App/actions';
 
 describe('<HomePage />', () => {
-  it('should render fetch the repos on mount if a username exists', () => {
-    const submitSpy = jest.fn();
-    mount(
-      <HomePage
-        city="Not Empty"
-        onGetCities={() => {}}
-        onSubmitForm={submitSpy}
-      />,
-    );
-    expect(submitSpy).toHaveBeenCalled();
-  });
-
   it('should not call onSubmitForm if username is an empty string', () => {
     const submitSpy = jest.fn();
     mount(<HomePage onGetCities={() => {}} onSubmitForm={submitSpy} />);
@@ -42,12 +30,11 @@ describe('<HomePage />', () => {
         expect(result.onGetCities).toBeDefined();
       });
 
-      it('should dispatch changeUsername when called', () => {
+      it('should dispatch getCities when called', () => {
         const dispatch = jest.fn();
         const result = mapDispatchToProps(dispatch);
-        const city = {};
-        result.onGetCities({ target: { value: city } });
-        expect(dispatch).toHaveBeenCalledWith(getCities(city));
+        result.onGetCities();
+        expect(dispatch).toHaveBeenCalledWith(getCities());
       });
     });
 

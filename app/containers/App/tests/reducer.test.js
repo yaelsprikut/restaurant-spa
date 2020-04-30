@@ -5,7 +5,9 @@ describe('appReducer', () => {
   let state;
   beforeEach(() => {
     state = {
+      city: null,
       loading: false,
+      restaurants: null,
       error: false,
       currentUser: false,
       userData: {

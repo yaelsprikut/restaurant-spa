@@ -1,5 +1,5 @@
 import homeReducer from '../reducer';
-import { getCities } from '../actions';
+import { getCitiesSuccess } from '../actions';
 
 describe('homeReducer', () => {
   let state;
@@ -18,6 +18,6 @@ describe('homeReducer', () => {
     const fixture = {};
     const expectedResult = { ...state, city: fixture };
 
-    expect(homeReducer(state, getCities(fixture))).toEqual(expectedResult);
+    expect(homeReducer(state, getCitiesSuccess(fixture))).toEqual(expectedResult);
   });
 });
