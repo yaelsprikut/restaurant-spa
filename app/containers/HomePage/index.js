@@ -16,8 +16,7 @@ import saga from './saga';
 import HomePage from './HomePage';
 
 const mapDispatchToProps = (dispatch) => ({
-  onGetTestDispatch: () => dispatch({type: "TEST_DISPATCH"}),
-  onGetCities: async () => await dispatch(getCities()),
+  onGetCities: () => dispatch(getCities()),
   onSubmitForm: (evt) => {
     if (evt !== undefined && evt.preventDefault) evt.preventDefault();
     dispatch(loadRepos());

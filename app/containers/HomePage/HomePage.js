@@ -13,8 +13,6 @@ import './style.scss';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
 import { Typeahead } from 'react-bootstrap-typeahead';
-import { getCities } from './actions';
-import { fetchProducts } from './saga'
 
 export default class HomePage extends React.PureComponent {
   // eslint-disable-line react/prefer-stateless-function
@@ -22,21 +20,15 @@ export default class HomePage extends React.PureComponent {
    * when initial state username is not null, submit the form to load repos
    */
   componentDidMount() {
-    const { onGetCities } = this.props;
-    if(this.props.cities === null) {
+    const { onGetCities, cities } = this.props;
+    if (cities === null) {
       onGetCities();
     }
   }
 
   render() {
     const {
-      loading,
-      error,
-      repos,
-      city,
-      onGetCities,
-      onGetTestDispatch,
-      // onSubmitForm,
+      loading, error, repos, cities, city
     } = this.props;
     const reposListProps = {
       loading,
@@ -62,13 +54,12 @@ export default class HomePage extends React.PureComponent {
               className="cityField"
               value={city}
               placeholder="Enter a city..."
-              options={this.props.cities}
+              options={cities}
               // onChange={(selected) => {
               //   // Handle selections...
-              //   onGetCities
               // }}
             />{' '}
-             <Typeahead
+            <Typeahead
               multiple
               id="renderField"
               type="text"
@@ -76,17 +67,8 @@ export default class HomePage extends React.PureComponent {
               value={city}
               placeholder="Refine results by adding names, ..."
               options={['array', 'of', 'refines']}
-              onChange={(selected) => {
-                // Handle selections...
-                console.log(selected)
-              }}
+              // onChange={(selected) => {}}
             />{' '}
-             {/* <input
-                  id="username"
-                  type="text"
-                  placeholder="flexdinesh"
-                  onChange={onGetCities}
-                /> */}
             <Table />
             <ReposList {...reposListProps} />
           </section>

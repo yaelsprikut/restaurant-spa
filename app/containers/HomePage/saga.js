@@ -38,8 +38,3 @@ export default function* githubData() {
   // It will be cancelled automatically on component unmount
   yield takeLatest(LOAD_REPOS, getRepos);
 }
-
-export function* fetchProducts() {
-  // create and yield a dispatch Effect
-  yield put({ type: 'PRODUCTS_RECEIVED' })
-}

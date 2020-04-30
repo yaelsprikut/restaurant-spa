@@ -43,13 +43,7 @@ describe('<HomePage />', () => {
 
   it('should not call onSubmitForm if city is null', () => {
     const submitSpy = jest.fn();
-    mount(
-      <HomePage
-        city=""
-        onGetCities={() => {}}
-        onSubmitForm={submitSpy}
-      />,
-    );
+    mount(<HomePage city="" onGetCities={() => {}} onSubmitForm={submitSpy} />);
     expect(submitSpy).not.toHaveBeenCalled();
   });
 

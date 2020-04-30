@@ -4,9 +4,9 @@
 
 import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'connected-react-router';
+import thunk from 'redux-thunk';
 import createSagaMiddleware from 'redux-saga';
 import createReducer from './reducers';
-import thunk from 'redux-thunk'
 
 const sagaMiddleware = createSagaMiddleware();
 

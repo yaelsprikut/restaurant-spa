@@ -12,4 +12,4 @@ export const GET_RESTAURANTS = 'restaurant-spa/Home/GET_RESTAURANTS';
 export const GET_RESTAURANTS_SUCCESS = 'restaurant-spa/Home/GET_RESTAURANTS_SUCCESS';
 export const GET_RESTAURANTS_FAILURE = 'restaurant-spa/Home/GET_RESTAURANTS_FAILURE';
 
-export const OPENTABLE_API_URL = 'http://opentable.herokuapp.com/api'
+export const OPENTABLE_API_URL = 'http://opentable.herokuapp.com/api';
