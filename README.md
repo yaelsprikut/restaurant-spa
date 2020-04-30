@@ -45,5 +45,14 @@ This boilerplate features all the latest tools and practices in the industry.
 - _Lint_ - ESlint
 - _Styles_ - SCSS Styling
 
+## AODA Compliance 
+
+This project was tested with the following W3 Tools:
+- https://www.webaccessibility.com/ (compliance score: 91%)
+- https://achecker.ca/ (compliance score: passed)
+- Lighthouse audit
+  Performance: 70%
+  Accessibility: 90%
+  SEO: 100%
 
 
