@@ -16,7 +16,8 @@ function homeReducer(state = initialState, action) {
     case GET_RESTAURANTS_SUCCESS:
       return {
         ...state,
-        restaurants: action.data,
+        // append results on select
+        restaurants: [...state.restaurants ? state.restaurants : '', action.data],
       };
     default:
       return state;

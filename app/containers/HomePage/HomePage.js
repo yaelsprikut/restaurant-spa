@@ -20,16 +20,14 @@ export default class HomePage extends React.PureComponent {
    * when initial state username is not null, submit the form to load repos
    */
   componentDidMount() {
-    const { onGetCities, onGetRestaurantsForCity, cities } = this.props;
-    if (cities === null) {
+    const { onGetCities } = this.props;
       onGetCities();
-      onGetRestaurantsForCity('toronto');
-    }
   }
 
   render() {
+    const ref = React.createRef();
     const {
-      loading, error, repos, cities, city
+      loading, error, repos, cities, city, onGetRestaurantsForCity
     } = this.props;
     const reposListProps = {
       loading,
@@ -50,27 +48,31 @@ export default class HomePage extends React.PureComponent {
           <section>
             <Typeahead
               multiple
+              ref={ref}
               id="cityField"
               type="text"
               className="cityField"
               value={city}
               placeholder="Enter a city..."
-              options={cities}
-              // onChange={(selected) => {
-              //   // Handle selections...
-              // }}
+              options={cities ? cities : []}
+              onChange={(selected) => {
+                // avoid duplicates being stored to state 
+                let lastSelected = selected.slice(-1)[0]
+                onGetRestaurantsForCity(lastSelected)
+              }}
             />{' '}
+            {/* <p>Refine results by adding names, addresses, areas...</p> */}
             <Typeahead
               multiple
               id="renderField"
               type="text"
               className="refineField"
               value={city}
-              placeholder="Refine results by adding names, ..."
+              placeholder="Refine search results by adding names, addresses, areas..."
               options={['array', 'of', 'refines']}
               // onChange={(selected) => {}}
             />{' '}
-            <Table />
+            <Table restaurants={this.props.restaurants} />
             <ReposList {...reposListProps} />
           </section>
         </div>

@@ -50,18 +50,20 @@ export function getRestaurantsForCityError(data) {
 }
 
 export function getRestaurantsForCity(city) {
-  const url = `${OPENTABLE_API_URL}/restaurants?city=${city}`;
-
+  // get all restaurants for all selected cities
   return async function (dispatch) { // eslint-disable-line func-names
     try {
-      const response = await axios.get(url);
-      const data = response.data.restaurants;
+        const url = `${OPENTABLE_API_URL}/restaurants?city=${city}`;
+        const response = await axios.get(url);
+        const data = response.data.restaurants;
+
       let restaurantList = [];
       Object.keys(data).map(function(key) {
         restaurantList.push({
           "name": data[key].name,
           "address": data[key].address,
-          "area": data[key].area
+          "area": data[key].area,
+          "city": data[key].city
         })
       });
       dispatch(getRestaurantsForCitySuccess(restaurantList));
@@ -70,3 +72,4 @@ export function getRestaurantsForCity(city) {
     }
   };
 }
+

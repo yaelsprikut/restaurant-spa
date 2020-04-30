@@ -33,16 +33,15 @@
 .cityField {
   background-repeat: no-repeat;
   font-size: 16px;
-  padding: 12px 20px 12px 20px;
-  border: 1px solid #ddd;
-  margin-bottom: 12px;
+  width: 30% !important;
+  display: inline-block;
 }
 .refineField {
   background-repeat: no-repeat;
   font-size: 16px;
-  padding: 12px 20px 12px 20px;
-  border: 1px solid #ddd;
-  margin-bottom: 12px;
+  padding: 0px 0px 0px 0px;
+  width: 69.4% !important;
+  display: inline-block;
 }
 
 .table {
@@ -52,9 +51,12 @@
 
 $breakpoint-tablet: 768px;
 @media (max-width: $breakpoint-tablet) {
-  #cityField,
-  #refineField {
-    width: 100%;
+  .cityField,
+  .refineField {
+    width: 100% !important;
+  }
+  .resicon {
+    display: none;
   }
 }
 #myTable {
@@ -62,16 +64,18 @@ $breakpoint-tablet: 768px;
   width: 100%;
   overflow-y: auto;
   border: 1px solid #ddd;
-  font-size: 18px;
   th {
     text-align: left;
     padding: 12px;
+    font-size: 16px;
   }
   td {
     text-align: left;
     padding: 12px;
   }
   tr {
+    font-size: 13px;
+    display: table-row;
     border-bottom: 1px solid #ddd;
     &:hover {
       background-color: #f1f1f1;
@@ -79,5 +83,10 @@ $breakpoint-tablet: 768px;
   }
   .header {
     background-color: #f1f1f1;
+  }
+  .resicon {
+    width: 20%;
+    float: left;
+    vertical-align: middle;
   }
 }
