@@ -13,19 +13,21 @@ class Table extends React.Component { // eslint-disable-line react/prefer-statel
       </div>
     )
 
+    // check if there are any empty 
+
     if(restaurants && restaurants.slice(-1)[0].length > 0) {
       restaurants.forEach((restaurantList) => {
         if(!restaurantNames.includes(restaurantList[0].name)) {
-          restaurantList.forEach((restaurant, index) => {
+          restaurantList.forEach((restaurant) => {
             tableRows.push(
-              <tr key={index + 2}>
-              <td key={index}>
+              <tr key={Math.random()}>
+              <td key={Math.random()}>
                 <img className="resicon" align="center" src={icon} alt="restaruant icon" />
                 <b>Name:</b> {restaurant.name}<br/>
                 <b>Address:</b> {restaurant.address}<br/>
                 <b>Area:</b> {restaurant.area}
               </td>
-              <td key={index + 1}>{restaurant.city}</td>
+              <td key={Math.random()}>{restaurant.city}</td>
             </tr>
             )
           })
@@ -33,7 +35,7 @@ class Table extends React.Component { // eslint-disable-line react/prefer-statel
           restaurantNames.push(restaurantList[0].name)
       })
     } else {
-      tableRows = (<tr><td colspan="2">No results found. Please try filtering again.</td></tr>)
+      tableRows = (<tr><td colSpan="2">No results found. Please try filtering again.</td></tr>)
     }
 
     return (

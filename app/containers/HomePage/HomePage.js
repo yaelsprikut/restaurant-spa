@@ -58,7 +58,9 @@ export default class HomePage extends React.PureComponent {
               onChange={(selected) => {
                 // avoid duplicates being stored to state 
                 let lastSelected = selected.slice(-1)[0]
-                onGetRestaurantsForCity(lastSelected)
+                if(lastSelected !== undefined) {
+                  onGetRestaurantsForCity(lastSelected)
+                }
               }}
             />{' '}
             {/* <p>Refine results by adding names, addresses, areas...</p> */}
