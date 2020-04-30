@@ -20,9 +20,10 @@ export default class HomePage extends React.PureComponent {
    * when initial state username is not null, submit the form to load repos
    */
   componentDidMount() {
-    const { onGetCities, cities } = this.props;
+    const { onGetCities, onGetRestaurantsForCity, cities } = this.props;
     if (cities === null) {
       onGetCities();
+      onGetRestaurantsForCity('toronto');
     }
   }
 
@@ -86,4 +87,5 @@ HomePage.propTypes = {
   city: PropTypes.string,
   cities: PropTypes.array,
   onGetCities: PropTypes.func,
+  onGetRestaurantsForCity: PropTypes.func,
 };

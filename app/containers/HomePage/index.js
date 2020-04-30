@@ -9,14 +9,15 @@ import {
   makeSelectError,
 } from 'containers/App/selectors';
 import { loadRepos } from '../App/actions';
-import { getCities } from './actions';
-import { makeSelectUsername, makeSelectCities } from './selectors';
+import { getCities, getRestaurantsForCity } from './actions';
+import { makeSelectUsername, makeSelectCities, makeSelectRestaurants } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import HomePage from './HomePage';
 
 const mapDispatchToProps = (dispatch) => ({
   onGetCities: () => dispatch(getCities()),
+  onGetRestaurantsForCity: (city) => dispatch(getRestaurantsForCity(city)),
   onSubmitForm: (evt) => {
     if (evt !== undefined && evt.preventDefault) evt.preventDefault();
     dispatch(loadRepos());
@@ -27,6 +28,7 @@ const mapStateToProps = createStructuredSelector({
   repos: makeSelectRepos(),
   username: makeSelectUsername(),
   cities: makeSelectCities(),
+  restaurants: makeSelectRestaurants(),
   loading: makeSelectLoading(),
   error: makeSelectError(),
 });
