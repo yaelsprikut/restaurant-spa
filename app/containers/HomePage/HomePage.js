@@ -19,6 +19,13 @@ export default class HomePage extends React.PureComponent {
   /**
    * when initial state username is not null, submit the form to load repos
    */
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      selected: []
+    }
+  }
   componentDidMount() {
     const { onGetCities } = this.props;
       onGetCities();
@@ -56,8 +63,10 @@ export default class HomePage extends React.PureComponent {
               placeholder="Enter a city..."
               options={cities ? cities : []}
               onChange={(selected) => {
+                this.setState({ selected })
                 // avoid duplicates being stored to state 
                 let lastSelected = selected.slice(-1)[0]
+                // make sure undefined values don't get passed here
                 if(lastSelected !== undefined) {
                   onGetRestaurantsForCity(lastSelected)
                 }
@@ -74,7 +83,7 @@ export default class HomePage extends React.PureComponent {
               options={['array', 'of', 'refines']}
               // onChange={(selected) => {}}
             />{' '}
-            <Table restaurants={this.props.restaurants} />
+            <Table restaurants={this.props.restaurants} selectedCities={this.state.selected} />
             <ReposList {...reposListProps} />
           </section>
         </div>

@@ -3,7 +3,7 @@ import icon from '../../containers/HomePage/images/resicon.png';
 
 class Table extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
-    const { restaurants } = this.props;
+    const { restaurants, selectedCities } = this.props;
     let tableRows = []
     let restaurantNames = []
     let infoWidget = (
@@ -13,11 +13,10 @@ class Table extends React.Component { // eslint-disable-line react/prefer-statel
       </div>
     )
 
-    // check if there are any empty 
-
+    // check if there are any empty restaurant lists
     if(restaurants && restaurants.slice(-1)[0].length > 0) {
       restaurants.forEach((restaurantList) => {
-        if(!restaurantNames.includes(restaurantList[0].name)) {
+        if(!restaurantNames.includes(restaurantList[0].name) && selectedCities.includes(restaurantList[0].city)) {
           restaurantList.forEach((restaurant) => {
             tableRows.push(
               <tr key={Math.random()}>
@@ -31,8 +30,8 @@ class Table extends React.Component { // eslint-disable-line react/prefer-statel
             </tr>
             )
           })
-        }
-          restaurantNames.push(restaurantList[0].name)
+        } 
+        restaurantNames.push(restaurantList[0].name)
       })
     } else {
       tableRows = (<tr><td colSpan="2">No results found. Please try filtering again.</td></tr>)
