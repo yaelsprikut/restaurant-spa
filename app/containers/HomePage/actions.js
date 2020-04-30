@@ -5,7 +5,7 @@ import {
   GET_CITIES_SUCCESS,
   GET_CITIES_FAILURE,
   GET_RESTAURANTS_SUCCESS,
-  GET_RESTAURANTS_FAILURE
+  GET_RESTAURANTS_FAILURE,
 } from './constants';
 
 export function getCitiesSuccess(data) {
@@ -25,7 +25,7 @@ export function getCitiesError(data) {
 export function getCities() {
   const url = `${OPENTABLE_API_URL}/cities`;
 
-  return async function (dispatch) { // eslint-disable-line func-names
+  return async function (dispatch) {
     try {
       const response = await axios.get(url);
       dispatch(getCitiesSuccess(response.data.cities));
@@ -51,25 +51,26 @@ export function getRestaurantsForCityError(data) {
 
 export function getRestaurantsForCity(city) {
   // get all restaurants for all selected cities
-  return async function (dispatch) { // eslint-disable-line func-names
+  return async function (dispatch) {
     try {
-        const url = `${OPENTABLE_API_URL}/restaurants?city=${city}`;
-        const response = await axios.get(url);
-        const data = response.data.restaurants;
+      const url = `${OPENTABLE_API_URL}/restaurants?city=${city}`;
+      const response = await axios.get(url);
+      const data = response.data.restaurants;
 
-      let restaurantList = [];
-      Object.keys(data).map(function(key) {
-        restaurantList.push({
-          "name": data[key].name,
-          "address": data[key].address,
-          "area": data[key].area,
-          "city": data[key].city
-        })
+      const restaurantList = [];
+      Object.keys(data).map(function (key) { // eslint-disable-line prefer-arrow-callback
+        return restaurantList.push({
+          name: data[key].name,
+          address: data[key].address,
+          area: data[key].area,
+          city: data[key].city,
+          price: data[key].price,
+          country: data[key].country,
+        });
       });
-      dispatch(getRestaurantsForCitySuccess(restaurantList));
+      return dispatch(getRestaurantsForCitySuccess(restaurantList));
     } catch (error) {
-      dispatch(getRestaurantsForCityError(error));
+      return dispatch(getRestaurantsForCityError(error));
     }
   };
 }
-

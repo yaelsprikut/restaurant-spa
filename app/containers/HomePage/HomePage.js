@@ -15,32 +15,60 @@ import 'react-bootstrap-typeahead/css/Typeahead.css';
 import { Typeahead } from 'react-bootstrap-typeahead';
 
 export default class HomePage extends React.PureComponent {
-  // eslint-disable-line react/prefer-stateless-function
-  /**
-   * when initial state username is not null, submit the form to load repos
-   */
   constructor(props) {
     super(props);
 
     this.state = {
-      selected: []
-    }
+      selectedCities: [],
+      selectedRestaurantItems: [],
+    };
   }
+
   componentDidMount() {
     const { onGetCities } = this.props;
-      onGetCities();
+    onGetCities();
   }
 
   render() {
     const ref = React.createRef();
     const {
-      loading, error, repos, cities, city, onGetRestaurantsForCity
+      loading,
+      error,
+      repos,
+      cities,
+      city,
+      restaurants,
+      onGetRestaurantsForCity,
     } = this.props;
     const reposListProps = {
       loading,
       error,
       repos,
     };
+
+    const { selectedCities, selectedRestaurantItems } = this.state;
+
+    const restaurantInfoArray = [];
+    const restaurantInfoObj = [];
+
+    if (restaurants) {
+      restaurants.forEach((restaurantList) => {
+        restaurantList.forEach((restaurant) => {
+          if (selectedCities.includes(restaurant.city)) {
+            restaurantInfoArray.push(
+              restaurant.name,
+              restaurant.address,
+              restaurant.area,
+            );
+            restaurantInfoObj.push({
+              name: restaurant.name,
+              address: restaurant.address,
+              area: restaurant.area,
+            });
+          }
+        });
+      });
+    }
 
     return (
       <article>
@@ -61,14 +89,14 @@ export default class HomePage extends React.PureComponent {
               className="cityField"
               value={city}
               placeholder="Enter a city..."
-              options={cities ? cities : []}
+              options={cities ? cities : []} // eslint-disable-line no-unneeded-ternary
               onChange={(selected) => {
-                this.setState({ selected })
-                // avoid duplicates being stored to state 
-                let lastSelected = selected.slice(-1)[0]
+                this.setState({ selectedCities: selected });
+                // avoid duplicates being stored to state
+                const lastSelected = selected.slice(-1)[0];
                 // make sure undefined values don't get passed here
-                if(lastSelected !== undefined) {
-                  onGetRestaurantsForCity(lastSelected)
+                if (lastSelected !== undefined) {
+                  onGetRestaurantsForCity(lastSelected);
                 }
               }}
             />{' '}
@@ -80,10 +108,17 @@ export default class HomePage extends React.PureComponent {
               className="refineField"
               value={city}
               placeholder="Refine search results by adding names, addresses, areas..."
-              options={['array', 'of', 'refines']}
-              // onChange={(selected) => {}}
+              options={restaurantInfoArray}
+              onChange={(selected) => {
+                // avoid duplicates being stored to state
+                this.setState({ selectedRestaurantItems: selected });
+              }}
             />{' '}
-            <Table restaurants={this.props.restaurants} selectedCities={this.state.selected} />
+            <Table
+              restaurants={restaurants}
+              selectedCities={selectedCities}
+              selectedRestaurants={selectedRestaurantItems}
+            />
             <ReposList {...reposListProps} />
           </section>
         </div>
@@ -99,6 +134,7 @@ HomePage.propTypes = {
   onSubmitForm: PropTypes.func,
   city: PropTypes.string,
   cities: PropTypes.array,
+  restaurants: PropTypes.array,
   onGetCities: PropTypes.func,
   onGetRestaurantsForCity: PropTypes.func,
 };
