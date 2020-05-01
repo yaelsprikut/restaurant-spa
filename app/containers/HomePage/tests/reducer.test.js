@@ -1,5 +1,5 @@
 import homeReducer from '../reducer';
-import { getCitiesSuccess } from '../actions';
+import { getCitiesSuccess, getRestaurantsForCitySuccess } from '../actions';
 
 describe('homeReducer', () => {
   let state;
@@ -15,10 +15,17 @@ describe('homeReducer', () => {
     expect(homeReducer(undefined, {})).toEqual(expectedResult);
   });
 
-  it('should handle the changeUsername action correctly', () => {
+  it('should handle the getCitiesSuccess action correctly', () => {
     const fixture = {};
     const expectedResult = { ...state, city: fixture };
 
     expect(homeReducer(state, getCitiesSuccess(fixture))).toEqual(expectedResult);
+  });
+
+  it('should handle the getRestaurantsForCitySuccess action correctly', () => {
+    const fixture = [];
+    const expectedResult = { ...state, restaurants: [fixture] };
+
+    expect(homeReducer(state, getRestaurantsForCitySuccess(fixture))).toEqual(expectedResult);
   });
 });
