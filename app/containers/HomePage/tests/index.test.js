@@ -6,18 +6,11 @@ import React from 'react';
 import { mount } from 'enzyme';
 import HomePage from '../HomePage';
 import { mapDispatchToProps } from '../index';
-import { loadRepos } from '../../App/actions';
 
 describe('<HomePage />', () => {
   it('should not call onSubmitForm if username is an empty string', () => {
     const submitSpy = jest.fn();
-    mount(<HomePage onGetCities={() => {}} onSubmitForm={submitSpy} />);
-    expect(submitSpy).not.toHaveBeenCalled();
-  });
-
-  it('should not call onSubmitForm if city is null', () => {
-    const submitSpy = jest.fn();
-    mount(<HomePage city="" onGetCities={() => {}} onSubmitForm={submitSpy} />);
+    mount(<HomePage onGetCities={() => {}} onGetRestaurantsForCity={submitSpy} />);
     expect(submitSpy).not.toHaveBeenCalled();
   });
 
@@ -37,26 +30,18 @@ describe('<HomePage />', () => {
       });
     });
 
-    describe('onSubmitForm', () => {
+    describe('onGetRestaurantsForCity', () => {
       it('should be injected', () => {
         const dispatch = jest.fn();
         const result = mapDispatchToProps(dispatch);
-        expect(result.onSubmitForm).toBeDefined();
+        expect(result.onGetRestaurantsForCity).toBeDefined();
       });
 
-      it('should dispatch loadRepos when called', () => {
+      it('should dispatch getRestaurantsForCity when called', () => {
         const dispatch = jest.fn();
         const result = mapDispatchToProps(dispatch);
-        result.onSubmitForm();
-        expect(dispatch).toHaveBeenCalledWith(loadRepos());
-      });
-
-      it('should preventDefault if called with event', () => {
-        const preventDefault = jest.fn();
-        const result = mapDispatchToProps(() => {});
-        const evt = { preventDefault };
-        result.onSubmitForm(evt);
-        expect(preventDefault).toHaveBeenCalledWith();
+        result.onGetRestaurantsForCity();
+        expect(dispatch).toHaveBeenCalled();
       });
     });
   });
